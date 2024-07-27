@@ -12,6 +12,8 @@ conn = psycopg2.connect('postgresql://postgres:1234@localhost/krishibazar')
 def home():
     return render_template('pages/home.html') 
 
+
+
 @app.route('/login',methods=['GET','POST'])
 def login():
     if request.method == 'GET':
