@@ -1,0 +1,56 @@
+{% include 'components/navbar.html' %}
+<br>
+<div class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
+        <h1 class="text-2xl font-bold mb-6 text-gray-800">Add New Product</h1>
+        <form action="#" method="POST">
+            <div class="mb-4">
+                <label for="product-name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                <input type="text" id="product-name" name="product-name" required 
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2" />
+            </div>
+
+            <div class="mb-4">
+                <label for="product-description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea id="product-description" name="product-description" rows="4" required
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2"></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="product-image" class="block text-sm font-medium text-gray-700">Images/URL</label>
+                <input type="text"  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2" name="product-image">
+            </div>
+
+            <div class="mb-4">
+                <label for="product-price" class="block text-sm font-medium text-gray-700">Price</label>
+                <input type="number" id="product-price" name="product-price" required 
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2" />
+            </div>
+<!-- 
+            <div class="mb-4">
+                <label for="product-category" class="block text-sm font-medium text-gray-700">Category</label>
+                <select id="product-category" name="product-category" required 
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm p-2">
+                    <option value="">Select a category</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="home">Home</option>
+                    <option value="books">Books</option>
+                </select>
+            </div> -->
+
+            <!-- <div class="mb-4">
+                <label for="product-image" class="block text-sm font-medium text-gray-700">Product Image</label>
+                <input type="file" id="product-image" name="product-image" 
+                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-md file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200" />
+            </div> -->
+
+            <div class="flex items-center justify-between">
+                <button type="submit" 
+                    class="bg-green-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                    Add Product
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
