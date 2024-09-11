@@ -1,0 +1,93 @@
+<!-- views/pages/product_detail.html -->
+{% include 'components/navbar.html' %}
+
+<div class="container mx-auto py-8">
+    <div class="bg-white shadow-md rounded-lg p-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Product Image -->
+        <div>
+            <img src="{{ product[4] }}" alt="{{ product[1] }}" class="w-full h-96 object-cover rounded-lg">
+        </div>
+
+        <!-- Product Details -->
+        <div>
+            <h1 class="text-3xl font-semibold text-gray-800">{{ product[1] }}</h1>
+            <p class="mt-4 text-gray-600">{{ product[2] }}</p> <!-- Product description -->
+            <p class="mt-4 text-2xl font-bold text-green-600">Rs {{ product[3] }}</p> <!-- Product price -->
+
+            <button class="mt-6 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600"
+                onclick="document.getElementById('add-to-cart-form').submit();">
+                Add to Cart
+            </button>
+
+            <form id="add-to-cart-form" action="/add_to_cart" method="POST" style="display:none;">
+                <input type="hidden" name="product_id" value="{{ product[0] }}">
+            </form>
+
+
+            <div class="mt-8">
+                <h2 class="text-2xl font-semibold text-gray-800">Customer Reviews</h2>
+
+                {% if reviews %}
+                {% for review in reviews %}
+                <div class="mt-4 border-b pb-4">
+                    <p class="text-xl font-bold">{{ review[0] }}</p> <!-- Reviewer's name -->
+                    <p class="text-yellow-500">
+                        {{ '★' * review[1] }}{{ '☆' * (5 - review[1]) }} <!-- Star rating -->
+                    </p>
+                    <p class="text-gray-600 mt-2">{{ review[2] }}</p> <!-- Review text -->
+                    <p class="text-gray-400 text-sm mt-2">{{ review[3] }}</p> <!-- Created at -->
+                </div>
+                {% endfor %}
+                {% else %}
+                <p class="text-gray-600 mt-4">No reviews yet. Be the first to leave a review!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Add a Review Form -->
+    <div class="bg-white shadow-md rounded-lg p-6 mt-12">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Leave a Review</h2>
+        <form action="/add_review" method="POST">
+            <!-- Hidden input to pass product_id -->
+            <input type="hidden" name="product_id" value="{{ product[0] }}">
+
+            <!-- Name -->
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700">Your Name</label>
+                <input type="text" name="name" id="name" class="w-full p-2 border rounded-lg"
+                    placeholder="Enter your name" required>
+            </div>
+
+            <!-- Rating -->
+            <div class="mb-4">
+                <label for="rating" class="block text-gray-700">Your Rating</label>
+                <select name="rating" id="rating" class="w-full p-2 border rounded-lg" required>
+                    <option value="5">★★★★★ - 5 Stars</option>
+                    <option value="4">★★★★☆ - 4 Stars</option>
+                    <option value="3">★★★☆☆ - 3 Stars</option>
+                    <option value="2">★★☆☆☆ - 2 Stars</option>
+                    <option value="1">★☆☆☆☆ - 1 Star</option>
+                </select>
+            </div>
+
+            <!-- Review -->
+            <div class="mb-4">
+                <label for="review" class="block text-gray-700">Your Review</label>
+                <textarea name="review" id="review" rows="4" class="w-full p-2 border rounded-lg"
+                    placeholder="Write your review here" required></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600">
+                Submit Review
+            </button>
+        </form>
+    </div>
+
+
+
+    </form>
+</div>
+</div>

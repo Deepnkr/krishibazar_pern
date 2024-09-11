@@ -40,8 +40,11 @@
     Sign Up
     </a> -->
     {% if session.user %}
-    <p class="font-medium text-sm p-3 cursor-pointer hover:bg-slate-300 sm:p-0 sm:hover:bg-transparent text-gray-600 hover:text-primary transition-colors">
+    <div class="flex justify-between ">
+      {% if session.email == 'admin@krishi.com' %}
+    <p class="font-medium text-sm p-3 cursor-pointer hover:bg-slate-300  sm:hover:bg-transparent text-gray-600 hover:text-primary transition-colors">
       <a href="/addproduct" class="hover:dark:text-green-900 text-3xl dark:text-white px-10">Add Products</a>
+      {% endif %}
     </p>
     <form action="/logout" method="post">
       <button type="submit" class="middle none center rounded-lg bg-green-600 py-3 px-6 font-sans text-xs font-bold  text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-900/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
