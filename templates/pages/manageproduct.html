@@ -1,0 +1,38 @@
+{% include 'components/navbar.html' %}
+
+{% block content %}
+
+<div class="container mx-auto p-5">
+    <h1 class="text-3xl font-bold mb-5 text-green-600">Welcome to the Dashboard of KrishiBazar</h1>
+
+    <!-- Cards for each product action -->
+    <div class="flex flex-row gap-5">
+        
+        <!-- Card 1: Add Product -->
+        <div class="bg-white shadow-md rounded-lg p-6 w-1/3 text-center">
+            <h2 class="text-xl font-semibold mb-4">Add Product</h2>
+            <a href="/addproduct" class="inline-block rounded-lg bg-green-600 py-6 px-12 font-sans text-lg font-bold text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-900/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                Add Product
+            </a>
+        </div>
+
+        <!-- Card 2: Edit Product -->
+        <div class="bg-white shadow-md rounded-lg p-6 w-1/3 text-center">
+            <h2 class="text-xl font-semibold mb-4">Edit Product</h2>
+            <a href="/editproduct" class="inline-block rounded-lg bg-blue-600 py-6 px-12 font-sans text-lg font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-900/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                Edit Product
+            </a>
+        </div>
+
+        <!-- Card 3: Delete Product -->
+        <div class="bg-white shadow-md rounded-lg p-6 w-1/3 text-center">
+            <h2 class="text-xl font-semibold mb-4">Delete Product</h2>
+            <a href="/deleteproduct" class="inline-block rounded-lg bg-red-600 py-6 px-12 font-sans text-lg font-bold text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-900/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                Delete Product
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

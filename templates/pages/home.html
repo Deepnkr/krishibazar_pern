@@ -42,16 +42,18 @@
         <h2 class="text-2xl font-semibold text-green-600 mb-4">Featured Products</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {% for product in products %}
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <a href="{{ url_for('product_detail', product_id=product[0]) }}" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <img src="{{ product[4] }}" alt="{{ product[1] }}" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="text-xl font-semibold text-green-600">{{ product[1] }}</h3>
                     <p class="text-gray-600 truncate">{{ product[2] }}</p> <!-- Shortened description -->
                     <p class="text-gray-800 font-bold mt-2">Rs {{ product[3] }}</p>
                 </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
+    </div>
+    
 
         <!-- Testimonials Section -->
         <div class="bg-green-100 text-green-800 p-6 rounded-lg mb-12">

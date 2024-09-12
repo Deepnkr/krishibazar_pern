@@ -30,6 +30,7 @@ def addProduct():
             conn.commit()
             return "Success"
 
+
 # Routes
 @app.route('/')
 def home():
@@ -181,6 +182,53 @@ def remove_from_cart(product_id):
             session.modified = True  # Mark session as modified to save changes
 
     return redirect('/cart')
+
+
+# manage product
+@app.route('/manageproduct')
+def manage_product():
+    # Ensure only admin can access this page
+    if session.get('email') == 'admin@krishi.com':
+        return render_template('pages/manageproduct.html')
+    else:
+        return redirect(url_for('home'))
+    
+
+    # add,delete,edit product
+@app.route('/addproduct', methods=['GET', 'POST'])
+def add_product():
+    if session.get('email') == 'admin@krishi.com':
+        # Logic to add a product goes here
+        return render_template('addproduct.html')
+
+@app.route('/editproduct', methods=['GET', 'POST'])
+def edit_product():
+    if session.get('email') == 'admin@krishi.com':
+        # Logic to edit a product goes here
+        return render_template('pages/editproduct.html')
+
+@app.route('/deleteproduct', methods=['GET', 'POST'])
+def delete_product():
+    if session.get('email') == 'admin@krishi.com':
+        # Logic to delete a product goes here
+        return render_template('pages/deleteproduct.html')
+    
+
+
+
+
+    
+# Populate the Product Data from Database
+def get_product_by_id(product_id):
+    # Query your database to get the product by ID
+    product = db.execute("SELECT * FROM products WHERE id = ?", (product_id,)).fetchone()
+    return product
+
+def get_reviews_for_product(product_id):
+    # Query your database to get reviews for the product
+    reviews = db.execute("SELECT name, rating, text, created_at FROM reviews WHERE product_id = ?", (product_id,)).fetchall()
+    return reviews
+
 
 
 if __name__ == '__main__':

@@ -43,7 +43,9 @@
     <div class="flex justify-between ">
       {% if session.email == 'admin@krishi.com' %}
     <p class="font-medium text-sm p-3 cursor-pointer hover:bg-slate-300  sm:hover:bg-transparent text-gray-600 hover:text-primary transition-colors">
-      <a href="/addproduct" class="hover:dark:text-green-900 text-3xl dark:text-white px-10">Add Products</a>
+      <!-- <a href="/addproduct" class="hover:dark:text-green-900 text-3xl dark:text-white px-10">Manage Product</a> -->
+      <a href="/manageproduct" class="hover:dark:text-green-900 text-3xl dark:text-white px-10">Manage Product</a>
+
       {% endif %}
     </p>
     <form action="/logout" method="post">
