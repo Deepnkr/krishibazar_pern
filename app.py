@@ -141,53 +141,44 @@ def signup():
             except Exception as e:
                 return f"Error: {e}"
 
-#Add to cart
-@app.route('/add_to_cart', methods=['POST'])
-def add_to_cart():
-    # Get the product ID from the form
-    product_id = request.form['product_id']
-
+# Add product to cart
+@app.route('/add_to_cart/<int:product_id>', methods=['POST'])
+def add_to_cart(product_id):
     # Initialize the cart in the session if it doesn't exist
     if 'cart' not in session:
         session['cart'] = []
 
-    # Check if the product is already in the cart
+    # Ensure the cart is a list and prevent duplicates
+    if not isinstance(session['cart'], list):
+        session['cart'] = []
+
+    # Add the product to the cart if it's not already there
     if product_id not in session['cart']:
         session['cart'].append(product_id)
+        session.modified = True  # Mark session as modified to save changes
 
-    # Redirect to the product page or cart page
-    return redirect('/cart')
+    return redirect('/cart')  # Redirect to the cart page
 
-
-#App rout
+# View cart
 @app.route('/cart')
 def cart():
-    if 'cart' not in session or len(session['cart']) == 0:
-        return "Your cart is empty."
+    if 'cart' not in session or not session['cart']:
+        return render_template('pages/empty_cart.html')  # Empty cart template
 
     # Fetch the products from the database based on product IDs in the cart
     cur = conn.cursor()
     cur.execute('SELECT * FROM products WHERE id IN %s', (tuple(session['cart']),))
     cart_items = cur.fetchall()
 
-    # Render the cart page with the cart items
     return render_template('pages/cart.html', cart_items=cart_items)
 
-
-#remove cart
-@app.route('/remove_from_cart', methods=['POST'])
-def remove_from_cart():
-    product_id = request.form['product_id']  # Product ID from form (string)
-    
-    # Convert product_id to string to ensure it matches the session's product_id format
-    if 'cart' in session:
-        # Ensure product_id is a string before removing
-        cart = session['cart']
-        if str(product_id) in cart:
-            print(f"Removing product_id: {product_id} from cart")
-            cart.remove(str(product_id))  # Remove the product from the cart
-        else:
-            print(f"Product ID {product_id} not found in cart")
+# Remove product from cart
+@app.route('/remove_from_cart/<int:product_id>', methods=['POST'])
+def remove_from_cart(product_id):
+    if 'cart' in session and isinstance(session['cart'], list):
+        if product_id in session['cart']:
+            session['cart'].remove(product_id)
+            session.modified = True  # Mark session as modified to save changes
 
     return redirect('/cart')
 
